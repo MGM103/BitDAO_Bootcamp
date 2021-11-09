@@ -1,0 +1,351 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "gameID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "gameOwner",
+								"type": "address"
+							},
+							{
+								"internalType": "string[2]",
+								"name": "teams",
+								"type": "string[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team1Score",
+								"type": "uint8[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team2Score",
+								"type": "uint8[2]"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct AflScoreTracker.Game",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"name": "gameCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "gameID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "gameOwner",
+								"type": "address"
+							},
+							{
+								"internalType": "string[2]",
+								"name": "teams",
+								"type": "string[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team1Score",
+								"type": "uint8[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team2Score",
+								"type": "uint8[2]"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct AflScoreTracker.Game",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"name": "gameScoreUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_teamA",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_teamB",
+						"type": "string"
+					}
+				],
+				"name": "createGame",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "gameID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "gameOwner",
+								"type": "address"
+							},
+							{
+								"internalType": "string[2]",
+								"name": "teams",
+								"type": "string[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team1Score",
+								"type": "uint8[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team2Score",
+								"type": "uint8[2]"
+							}
+						],
+						"internalType": "struct AflScoreTracker.Game",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "games",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "gameID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "gameOwner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_contributer",
+						"type": "address"
+					}
+				],
+				"name": "getContributions",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					}
+				],
+				"name": "getGameContext",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					}
+				],
+				"name": "getGameScore",
+				"outputs": [
+					{
+						"internalType": "uint256[2]",
+						"name": "",
+						"type": "uint256[2]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_gameDeployer",
+						"type": "address"
+					}
+				],
+				"name": "getGamesDeployed",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_teamID",
+						"type": "uint8"
+					}
+				],
+				"name": "incrementBehind",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_teamID",
+						"type": "uint8"
+					}
+				],
+				"name": "incrementGoal",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_team1Goals",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_team1Behinds",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_team2Goals",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_team2Behings",
+						"type": "uint8"
+					}
+				],
+				"name": "setScore",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/AflScoreTracker.sol": "AflScoreTracker"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/AflScoreTracker.sol": {
+			"keccak256": "0xb7d256fcdb0426f30c75a6e9c45b923ab237a37c808c6d3749fc5f7239e57c89",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://5e03d0f510ddddc522346c530fa213f1ba137ed16a36be366ce4deaed1cac012",
+				"dweb:/ipfs/QmZxJhsjip4CT1SYzRrNV5tur9x1y3GGwPYyb8Bf1vcZqs"
+			]
+		}
+	},
+	"version": 1
+}
