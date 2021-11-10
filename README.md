@@ -1,5 +1,5 @@
 # BitDAO_Bootcamp
-This repo will hold all the code created for the BitDAO solidity bootcamp
+This repo will hold all the code created for the BitDAO solidity bootcamp. \n
 Descriptions of the directories and to which homework item they apply to are given below.
 
 Homework 1: Basics of Solidity
