@@ -1,0 +1,73 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"görli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {
+				"@_12": {
+					"entryPoint": null,
+					"id": 12,
+					"parameterSlots": 0,
+					"returnSlots": 0
+				}
+			},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "6080604052348015600f57600080fd5b50600080546001600160a01b03191633179055603f80602f6000396000f3fe6080604052600080fdfea2646970667358221220418b31ffba6047ffa549e7785eec72ab43215e32fa13727715b35a2916d82e6264736f6c63430008090033",
+			"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x0 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND CALLER OR SWAP1 SSTORE PUSH1 0x3F DUP1 PUSH1 0x2F PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 COINBASE DUP12 BALANCE SELFDESTRUCT 0xBA PUSH1 0x47 SELFDESTRUCT 0xA5 0x49 0xE7 PUSH25 0x5EEC72AB43215E32FA13727715B35A2916D82E6264736F6C63 NUMBER STOP ADDMOD MULMOD STOP CALLER ",
+			"sourceMap": "106:96:0:-:0;;;152:48;;;;;;;;;-1:-1:-1;175:5:0;:18;;-1:-1:-1;;;;;;175:18:0;183:10;175:18;;;106:96;;;;;;"
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "6080604052600080fdfea2646970667358221220418b31ffba6047ffa549e7785eec72ab43215e32fa13727715b35a2916d82e6264736f6c63430008090033",
+			"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 COINBASE DUP12 BALANCE SELFDESTRUCT 0xBA PUSH1 0x47 SELFDESTRUCT 0xA5 0x49 0xE7 PUSH25 0x5EEC72AB43215E32FA13727715B35A2916D82E6264736F6C63 NUMBER STOP ADDMOD MULMOD STOP CALLER ",
+			"sourceMap": "106:96:0:-:0;;;;;"
+		},
+		"gasEstimates": {
+			"creation": {
+				"codeDepositCost": "12600",
+				"executionCost": "24301",
+				"totalCost": "36901"
+			}
+		},
+		"methodIdentifiers": {}
+	},
+	"abi": [
+		{
+			"inputs": [],
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		}
+	]
+}

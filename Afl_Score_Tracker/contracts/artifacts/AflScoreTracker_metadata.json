@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -39,6 +34,11 @@
 								"internalType": "uint8[2]",
 								"name": "team2Score",
 								"type": "uint8[2]"
+							},
+							{
+								"internalType": "bool",
+								"name": "scoreFinalised",
+								"type": "bool"
 							}
 						],
 						"indexed": false,
@@ -79,6 +79,56 @@
 								"internalType": "uint8[2]",
 								"name": "team2Score",
 								"type": "uint8[2]"
+							},
+							{
+								"internalType": "bool",
+								"name": "scoreFinalised",
+								"type": "bool"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct AflScoreTracker.Game",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"name": "gameScoreFinalised",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "gameID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "gameOwner",
+								"type": "address"
+							},
+							{
+								"internalType": "string[2]",
+								"name": "teams",
+								"type": "string[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team1Score",
+								"type": "uint8[2]"
+							},
+							{
+								"internalType": "uint8[2]",
+								"name": "team2Score",
+								"type": "uint8[2]"
+							},
+							{
+								"internalType": "bool",
+								"name": "scoreFinalised",
+								"type": "bool"
 							}
 						],
 						"indexed": false,
@@ -131,6 +181,11 @@
 								"internalType": "uint8[2]",
 								"name": "team2Score",
 								"type": "uint8[2]"
+							},
+							{
+								"internalType": "bool",
+								"name": "scoreFinalised",
+								"type": "bool"
 							}
 						],
 						"internalType": "struct AflScoreTracker.Game",
@@ -138,6 +193,19 @@
 						"type": "tuple"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gameID",
+						"type": "uint256"
+					}
+				],
+				"name": "finaliseScore",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -160,6 +228,11 @@
 						"internalType": "address",
 						"name": "gameOwner",
 						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "scoreFinalised",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -249,8 +322,8 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
-						"name": "_teamID",
+						"internalType": "enum AflScoreTracker.teamChoices",
+						"name": "_team",
 						"type": "uint8"
 					}
 				],
@@ -267,8 +340,8 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint8",
-						"name": "_teamID",
+						"internalType": "enum AflScoreTracker.teamChoices",
+						"name": "_team",
 						"type": "uint8"
 					}
 				],
@@ -339,11 +412,19 @@
 	},
 	"sources": {
 		"contracts/AflScoreTracker.sol": {
-			"keccak256": "0xb7d256fcdb0426f30c75a6e9c45b923ab237a37c808c6d3749fc5f7239e57c89",
+			"keccak256": "0xf2091df49c4cccaad3b3e729da247b61d49774a49591d3423d39611339ddf65e",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://5e03d0f510ddddc522346c530fa213f1ba137ed16a36be366ce4deaed1cac012",
-				"dweb:/ipfs/QmZxJhsjip4CT1SYzRrNV5tur9x1y3GGwPYyb8Bf1vcZqs"
+				"bzz-raw://904dadf37d9ea9ea481b61d667296d9a2dd8914344415f687af5c83e3b5e33ba",
+				"dweb:/ipfs/QmWn7ybqt4oCy5rwyG8mjeHYkM4SygVRYfSx6ihzkpyYRe"
+			]
+		},
+		"contracts/IsOwner.sol": {
+			"keccak256": "0x9a21c88da4fbfed94674a8101327571fd247401c9794598bcd07231e58344c95",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://123eeab8b9ef982d299790a917765646351c809df3dd7f8ab796b4fe8e067242",
+				"dweb:/ipfs/QmZJ1jkdjfigxzCmMJ5tEboTCAcqwcRiWT1VbmiZLRenVp"
 			]
 		}
 	},
