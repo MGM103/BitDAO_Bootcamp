@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract VolcanoCoin {
-    uint totalSupply = 10000;
+    uint volcanoSupply = 10000;
     address owner;
     
     struct Payment {
@@ -16,8 +16,8 @@ contract VolcanoCoin {
     mapping(address=>uint) balance;
     mapping(address=>Payment[]) payments;
     
-    event totalSupplyChange(uint);
-    event tokenTransfer(uint, address);
+    event TotalSupplyChange(uint);
+    event Transfer(uint, address);
     
     modifier isOwner(){
         require(msg.sender == owner);
@@ -26,19 +26,19 @@ contract VolcanoCoin {
     
     constructor(){
         owner = msg.sender;
-        balance[owner] = totalSupply;
+        balance[owner] = volcanoSupply;
     }
     
-    function getTotalSupply() public view returns(uint){
-        return totalSupply;
+    function totalSupply() public view returns(uint){
+        return volcanoSupply;
     }
     
     function increaseTotalSupply() public isOwner {
-        totalSupply = totalSupply + 1000;
-        emit totalSupplyChange(totalSupply);
+        volcanoSupply = volcanoSupply + 1000;
+        emit TotalSupplyChange(volcanoSupply);
     }
     
-    function getBalance(address _account) public view returns(uint) {
+    function balanceOf(address _account) public view returns(uint) {
         return balance[_account];
     }
     
@@ -52,6 +52,6 @@ contract VolcanoCoin {
         balance[msg.sender] = balance[msg.sender] - _amount;
         balance[_recipient] = balance[_recipient] + _amount;
         
-        emit tokenTransfer(_amount, _recipient);
+        emit Transfer(_amount, _recipient);
     }
 }
