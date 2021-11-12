@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.9+commit.e5eed63a"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -397,7 +397,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/AflScoreTracker.sol": "AflScoreTracker"
+			"Afl_Score_Tracker/contracts/AflScoreTracker.sol": "AflScoreTracker"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -405,21 +405,21 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"contracts/AflScoreTracker.sol": {
-			"keccak256": "0xf2091df49c4cccaad3b3e729da247b61d49774a49591d3423d39611339ddf65e",
+		"Afl_Score_Tracker/contracts/AflScoreTracker.sol": {
+			"keccak256": "0xda4449194a3db45a52d75a3976d13dfbbd5e2c75948436e1dcfdd739d26fda04",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://904dadf37d9ea9ea481b61d667296d9a2dd8914344415f687af5c83e3b5e33ba",
-				"dweb:/ipfs/QmWn7ybqt4oCy5rwyG8mjeHYkM4SygVRYfSx6ihzkpyYRe"
+				"bzz-raw://45366e07eb5dcba1a7aa8dd44bc221008b85f18151ede3d648724022d70e0e74",
+				"dweb:/ipfs/QmYKSirZCYKjPVUca8Undf7cCymX5Gp8Qyog1Gv8sLXhzQ"
 			]
 		},
-		"contracts/IsOwner.sol": {
+		"Afl_Score_Tracker/contracts/IsOwner.sol": {
 			"keccak256": "0x9a21c88da4fbfed94674a8101327571fd247401c9794598bcd07231e58344c95",
 			"license": "GPL-3.0",
 			"urls": [
