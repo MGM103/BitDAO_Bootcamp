@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract VolcanoCoin {
-    uint volcanoSupply = 10000;
+    uint volcanoSupply;
     address owner;
     
     struct Payment {
@@ -14,17 +14,18 @@ contract VolcanoCoin {
     //1. make balance a public variable
     //2. make a getter function that returns the balance of an address
     mapping(address=>uint) balance;
-    mapping(address=>Payment[]) payments;
+    mapping(address=>Payment[]) public payments;
     
     event TotalSupplyChange(uint);
-    event Transfer(uint, address);
+    event Transfer(uint, address indexed);
     
     modifier isOwner(){
-        require(msg.sender == owner);
+        require(msg.sender == owner, "Only owners permitted");
         _;
     }
     
     constructor(){
+        volcanoSupply = 10000;
         owner = msg.sender;
         balance[owner] = volcanoSupply;
     }
@@ -47,11 +48,14 @@ contract VolcanoCoin {
     //the individual calling the function is not the one transfering VolcanoCoins
     //and is doing it on someone else's behalf
     function transfer(uint _amount, address _recipient) public {
-        require(balance[msg.sender] >= _amount);
+        require(balance[msg.sender] >= _amount, "Insufficient funds");
         
         balance[msg.sender] = balance[msg.sender] - _amount;
         balance[_recipient] = balance[_recipient] + _amount;
         
         emit Transfer(_amount, _recipient);
+
+        Payment memory payment = Payment(_amount, msg.sender);
+        payments[msg.sender].push(payment);
     }
 }
