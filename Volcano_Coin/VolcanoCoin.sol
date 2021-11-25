@@ -55,7 +55,7 @@ contract VolcanoCoin {
         
         emit Transfer(_amount, _recipient);
 
-        Payment memory payment = Payment(_amount, msg.sender);
+        Payment memory payment = Payment(_amount, _recipient);
         payments[msg.sender].push(payment);
     }
 }
