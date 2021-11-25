@@ -11,7 +11,6 @@ Homework 3 & 4: My first ERC20, Volcano Coin
 
 Homework 5: Intro to OpenZeppelin
 - Volcano_Coin
-  - VolcanoCoinV2.sol
 
 Homework 6: My first NFT
 - Volcano_Token
