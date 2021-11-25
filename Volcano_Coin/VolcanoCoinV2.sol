@@ -5,6 +5,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.0.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.0.0/contracts/access/Ownable.sol";
 
 contract VolcanoCoin is ERC20("Volcano Coin", "VOL"), Ownable() {
+
+    uint initialSupply = 10000;
     
     struct Payment {
         uint amount;
@@ -13,22 +15,20 @@ contract VolcanoCoin is ERC20("Volcano Coin", "VOL"), Ownable() {
     
     mapping(address=>Payment[]) public payments;
     
-    event Transfer(uint, address);
     event TotalSupplyChange(uint);
     
     constructor(){
-        _mint(msg.sender, 10000);
+        _mint(msg.sender, initialSupply);
     }
     
     function mintMoreVol(uint _amount) public onlyOwner {
         _mint(msg.sender, _amount);
         emit TotalSupplyChange(totalSupply());
-        
     }
     
-    function transfer(address recipient, uint256 amount) public override returns (bool) {
-        _transfer(_msgSender(), recipient, amount);
-        _logPayment(_msgSender(), recipient, amount);
+    function transfer(address _recipient, uint _amount) public virtual override returns (bool) {
+        _transfer(msg.sender, _recipient, _amount);
+        _logPayment(msg.sender, _recipient, _amount);
         return true;
     }
     
