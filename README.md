@@ -17,4 +17,4 @@ Homework 6: My first NFT
 - Volcano_Token
 
 Homework 9: Introduction to Hardhat/Ethers
-- Ethers
+- Ethers_Basics
