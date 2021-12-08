@@ -1,14 +1,12 @@
-const hre = require("hardhat");
-const chai = require("chai");
-const { solidity } = require("ethereum-waffle");
-chai.use(solidity);
-const { expect } = chai;
+const { expect, use } = require("chai");
+const { ethers } = require("hardhat");
 const {
-  BN, // Big Number support
   constants, // Common constants, like the zero address and largest integers
-  expectEvent, // Assertions for emitted events
   expectRevert, // Assertions for transactions that should fail
 } = require("@openzeppelin/test-helpers");
+
+const { solidity } = require("ethereum-waffle");
+use(solidity);
 
 //https://www.chaijs.com/guide/styles/
 
@@ -49,34 +47,44 @@ describe("Volcano Coin", () => {
     expect(numDecimals).to.equal(18);
   });
 
-  it("assigns initial balance", async () => {
+  it("assigns initial balance to owner", async () => {
     let ownerBal = await volcanoContract.balanceOf(owner.address);
     expect(ownerBal).to.equal(100000);
   });
 
+  it("creates the correct initial supply", async () => {
+    let totalSupply = await volcanoContract.totalSupply();
+    expect(totalSupply).to.equal(100000);
+  })
+
   it("increases allowance for address1", async () => {
-    //let allowance = await volcanoContract.allowance(owner.address, addr1.address);
-    //console.log(`Address of the owner contract is: ${owner.address} \n Allowance is for address: ${addr1.address} \n The allowance of this address is: ${allowance}`);
-    await volcanoContract.increaseAllowance(addr1.address, 1000);
-    allowance = await volcanoContract.allowance(owner.address, addr1.address);
-    //console.log(`Address of the owner contract is: ${owner.address} \n Allowance is for address: ${addr1.address} \n The allowance of this address is: ${allowance}`);
+    let allowIncrease = 1000;
+    OGallowance = await volcanoContract.allowance(owner.address, addr1.address);
+    let tx = await volcanoContract.increaseAllowance(addr1.address, allowIncrease);
+    await tx.wait();
+    newAllowance = await volcanoContract.allowance(owner.address, addr1.address);
+    let allowanceDiff = newAllowance - OGallowance;
     
-    expect(allowance).to.equal(1000);
+    expect(allowanceDiff).to.equal(allowIncrease);
   });
 
   it("decreases allowance for address1", async () => {
-    await volcanoContract.increaseAllowance(addr1.address, 1000);
-    await volcanoContract.decreaseAllowance(addr1.address, 500);
-    allowance = await volcanoContract.allowance(owner.address, addr1.address);
+    OGallowance = await volcanoContract.allowance(owner.address, addr1.address);
+    let increaseTx = await volcanoContract.increaseAllowance(addr1.address, 1000);
+    await increaseTx.wait();
+
+    let decreaseAmount = 500;
+    let decreaseTx = await volcanoContract.decreaseAllowance(addr1.address, decreaseAmount);
+    await decreaseTx.wait();
+    newAllowance = await volcanoContract.allowance(owner.address, addr1.address);
     
-    expect(allowance).to.equal(500);
+    expect(newAllowance - OGallowance).to.equal(decreaseAmount);
   });
 
-  xit("emits an event when increasing allowance", async () => {
+  it("emits an event when increasing allowance", async () => {
     let allowanceTx = await volcanoContract.increaseAllowance(addr1.address, 1000);
-    let eventReceipt = await allowanceTx.wait();
-    await expectEvent(eventReceipt, 'Approval');
-    //{owner: owner.address, spender: addr1.address, value: 1000}
+    await allowanceTx.wait();
+    await expect(allowanceTx).to.emit(volcanoContract, 'Approval');
   });
 
   it("reverts decreaseAllowance when sender incurs negative allowance value", async () => {
@@ -88,26 +96,27 @@ describe("Volcano Coin", () => {
   });
 
   it("updates balances on successful transfer from owner to addr1", async () => {
-    // let senderBal = await volcanoContract.balanceOf(owner.address);
-    // let recipientBal = await volcanoContract.balanceOf(addr1.address);
-    // console.log(`Balance owner: ${senderBal}\n Balance addr1:${recipientBal}`);
+    let transferVal = 40000;
     
-    const transferTx = await volcanoContract.transfer(addr1.address, 50000);
+    let senderBalOG = await volcanoContract.balanceOf(owner.address);
+    let recipientBalOG = await volcanoContract.balanceOf(addr1.address);
+
+    const transferTx = await volcanoContract.transfer(addr1.address, transferVal);
     await transferTx.wait();
-    let senderBal = await volcanoContract.balanceOf(owner.address);
-    let recipientBal = await volcanoContract.balanceOf(addr1.address);
+
+    let senderBalNew = await volcanoContract.balanceOf(owner.address);
+    let recipientBalNew = await volcanoContract.balanceOf(addr1.address);
 
     //console.log(`Balance owner: ${senderBal}\n Balance addr1:${recipientBal}`);
 
-    expect(senderBal).to.equal(50000);
-    expect(recipientBal).to.equal(50000);
+    expect(senderBalOG - senderBalNew).to.equal(transferVal);
+    expect(recipientBalNew - recipientBalOG).to.equal(transferVal);
   });
 
   it("reverts transfer when sender does not have enough balance", async () => {
-    await expectRevert(
+    await expect(
       volcanoContract.transfer(addr1.address, 110000),
-      "ERC20: transfer amount exceeds balance"
-    )
+    ).to.be.revertedWith("ERC20: transfer amount exceeds balance")
   });
 
   it("reverts transferFrom addr1 to addr2 called by the owner without setting allowance", async () => {
@@ -124,21 +133,21 @@ describe("Volcano Coin", () => {
     const transferTx = await volcanoContract.transfer(addr1.address, 1000);
     await transferTx.wait();
 
-    let allowBalTx = await volcanoContract.allowance(owner.address, addr1.address)
-    console.log(`The allowance of owner to proxy spend is: ${allowBalTx}`);
+    //let allowBalTx = await volcanoContract.allowance(owner.address, addr1.address)
+    //console.log(`The allowance of owner to proxy spend is: ${allowBalTx}`);
 
     const allowanceTx = await volcanoContract.connect(addr1).increaseAllowance(owner.address, 1000);
     await allowanceTx.wait();
 
-    allowBalTx = await volcanoContract.allowance(addr1.address, owner.address)
-    console.log(`The allowance of owner to proxy spend is: ${allowBalTx}`);
+    //allowBalTx = await volcanoContract.allowance(addr1.address, owner.address)
+    //console.log(`The allowance of owner to proxy spend is: ${allowBalTx}`);
 
     const proxyTransferTx = await volcanoContract.transferFrom(addr1.address, addr2.address, 1000);
     await proxyTransferTx.wait();
 
     senderBal = await volcanoContract.balanceOf(addr1.address);
     recipBal = await volcanoContract.balanceOf(addr2.address);
-    console.log(`Sender:${senderBal} Recip:${recipBal}`);
+    //console.log(`Sender:${senderBal} Recip:${recipBal}`);
 
     expect(senderBal).to.equal(0);
     expect(recipBal).to.equal(1000);
