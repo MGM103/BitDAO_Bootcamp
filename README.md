@@ -15,7 +15,7 @@ Homework 5: Intro to OpenZeppelin
 
 Homework 6: My first NFT
 - NFTs
- - VolcanoToken.sol
+  - VolcanoToken.sol
 
 Homework 7 & 8: Decentralised Storage
 - Decentralised Storage
