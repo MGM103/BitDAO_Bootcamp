@@ -6,15 +6,21 @@ Homework 1: Basics of Solidity
  - Afl_Score_Tracker
 
 Homework 3 & 4: My first ERC20, Volcano Coin
- - Volcano_Coin
+ - ERC20s
    - VolcanoCoin.sol
 
 Homework 5: Intro to OpenZeppelin
- - Volcano_Coin
+ - ERC20s
    - VolcanoCoinV2.sol
 
 Homework 6: My first NFT
-- Volcano_Token
+- NFTs
+
+Homework 7 & 8: Decentralised Storage
 
 Homework 9: Introduction to Hardhat/Ethers
 - Ethers_Basics
+
+Homework 10: Volcano coin version 3
+- ERC20s
+ - VolcanoCoinV3.sol
