@@ -84,7 +84,6 @@ contract VolcanoCoinV3 is ERC20("Volcano Coin", "VLC"), Ownable {
 
     //Assumes that the user that made a payment and the admin are the only ones able to update it
     function updatePayment(uint256 _payID, PaymentTypes _paymentType, string calldata _comment) public {
-        require(_payID >= 0);
         //Not sure about require for enum
         //require(_comment); not sure about verifying string either
 
@@ -97,8 +96,7 @@ contract VolcanoCoinV3 is ERC20("Volcano Coin", "VLC"), Ownable {
     }
 
     function adminPaymentUpdate(address _user, uint256 _payID, PaymentTypes _paymentType) public isAdmin {
-        require(_payID >= 0);
-        require(_user != address(0));
+        require(_user != address(0), "Invalid address specified");
         //Not sure about require for enum
         //require(_comment); not sure about verifying string either
 

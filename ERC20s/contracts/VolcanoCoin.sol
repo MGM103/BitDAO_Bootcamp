@@ -2,22 +2,22 @@
 pragma solidity ^0.8.0;
 
 contract VolcanoCoin {
-    uint volcanoSupply;
+    uint256 volcanoSupply;
     address owner;
     
     struct Payment {
-        uint amount;
+        uint256 amount;
         address recipient;
     }
     
     //Two way to make balances viewable externally are:
     //1. make balance a public variable
     //2. make a getter function that returns the balance of an address
-    mapping(address=>uint) balance;
-    mapping(address=>Payment[]) public payments;
+    mapping(address=>uint256) balance;
+    mapping(address=>Payment[]) payments;
     
-    event TotalSupplyChange(uint);
-    event Transfer(uint, address indexed);
+    event TotalSupplyChange(uint256);
+    event Transfer(uint256, address);
     
     modifier isOwner(){
         require(msg.sender == owner, "Only owners permitted");
@@ -30,7 +30,7 @@ contract VolcanoCoin {
         balance[owner] = volcanoSupply;
     }
     
-    function totalSupply() public view returns(uint){
+    function totalSupply() public view returns(uint256){
         return volcanoSupply;
     }
     
@@ -39,7 +39,7 @@ contract VolcanoCoin {
         emit TotalSupplyChange(volcanoSupply);
     }
     
-    function balanceOf(address _account) public view returns(uint) {
+    function balanceOf(address _account) public view returns(uint256) {
         return balance[_account];
     }
     
@@ -47,7 +47,7 @@ contract VolcanoCoin {
     //The implication of having the sender's address as an arguement is that
     //the individual calling the function is not the one transfering VolcanoCoins
     //and is doing it on someone else's behalf
-    function transfer(uint _amount, address _recipient) public {
+    function transfer(uint256 _amount, address _recipient) public {
         require(balance[msg.sender] >= _amount, "Insufficient funds");
         
         balance[msg.sender] = balance[msg.sender] - _amount;
@@ -57,5 +57,9 @@ contract VolcanoCoin {
 
         Payment memory payment = Payment(_amount, _recipient);
         payments[msg.sender].push(payment);
+    }
+
+    function getPayments(address _account) public view returns(Payment[] memory){
+        return payments[_account];
     }
 }
