@@ -9,9 +9,9 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-contract VolcanoCoinV4 is Initializable, ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
+contract VolcanoCoinV4_1 is Initializable, ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
 
-    uint256 constant versionNum = 1;
+    uint256 constant versionNum = 2;
     uint256  constant initialSupply = 100000;
     address admin;
     
@@ -132,7 +132,6 @@ contract VolcanoCoinV4 is Initializable, ERC20Upgradeable, UUPSUpgradeable, Owna
     function getVersionNum() public pure returns(uint256){
         return versionNum;
     }
-
     function paymentType2String(PaymentTypes _paymentType) internal pure returns(string memory) {
         string memory retVal;
 

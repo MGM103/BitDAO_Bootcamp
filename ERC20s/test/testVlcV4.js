@@ -1,5 +1,5 @@
 const { expect, use } = require("chai");
-const { ethers } = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 const {
   constants, // Common constants, like the zero address and largest integers
   expectRevert, // Assertions for transactions that should fail
@@ -7,6 +7,7 @@ const {
 
 const { solidity } = require("ethereum-waffle");
 const expectEvent = require("@openzeppelin/test-helpers/src/expectEvent");
+const ether = require("@openzeppelin/test-helpers/src/ether");
 use(solidity);
 
 describe("Volcano Coin V4",  () => {
@@ -16,14 +17,20 @@ describe("Volcano Coin V4",  () => {
   beforeEach(async () => {
     const volcanoCoin = await ethers.getContractFactory("VolcanoCoinV4");
     
-    volcanoContract = await volcanoCoin.deploy();
-    await volcanoContract.deployed();
-
+    volcanoContract = await upgrades.deployProxy(volcanoCoin, {kind: "uups"});
     [owner, user1, user2, user3] = await ethers.getSigners();
   });
 
   it("Returns the correct version number on deployment", async () => {
     let versionNum = 1;
+    let contractVersion = await volcanoContract.getVersionNum();
+    expect(contractVersion).to.equal(versionNum);
+  })
+
+  it("Upgrades correctly", async () => {
+    let versionNum = 2;
+    let newVolcanoCoin = await ethers.getContractFactory("VolcanoCoinV4_1");
+    volcanoContract = await upgrades.upgradeProxy(volcanoContract.address, newVolcanoCoin);
     let contractVersion = await volcanoContract.getVersionNum();
     expect(contractVersion).to.equal(versionNum);
   })
