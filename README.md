@@ -2,27 +2,21 @@
 This repo will hold all the code created for the BitDAO solidity bootcamp.
 Descriptions of the directories and to which homework item they apply to are given below.
 
-Homework 1: Basics of Solidity
- - Afl_Score_Tracker
+Afl_Score_Tracker
+ - Homework 1: Solidity Basics
 
-Homework 3 & 4: My first ERC20, Volcano Coin
- - ERC20s
-   - VolcanoCoin.sol
+ERC20s
+ - Homework 3 & 4: Volcano Coin
+ - Homework 5: Volcano Coin V2
+ - Homework 10: Volcano Coin V3
+ - Homework 12: Volcano Coin V4 and V4.1
 
-Homework 5: Intro to OpenZeppelin
- - ERC20s
-   - VolcanoCoinV2.sol
+NFTs
+- Homework 6: Volcano Token
 
-Homework 6: My first NFT
-- NFTs
-  - VolcanoToken.sol
+Decentralised Storage
+- Homework 7
+- Homework 8
 
-Homework 7 & 8: Decentralised Storage
-- Decentralised Storage
-
-Homework 9: Introduction to Hardhat/Ethers
-- Ethers_Basics
-
-Homework 10: Volcano coin version 3
-- ERC20s
-  - VolcanoCoinV3.sol
+Ethers_Basics
+- Homework 9
