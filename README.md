@@ -15,8 +15,11 @@ NFTs
 - Homework 6: Volcano Token
 
 Decentralised Storage
-- Homework 7
-- Homework 8
+- Homework 7: Intro to IPFS
+- Homework 8: IPFS and NFTs
 
 Ethers_Basics
-- Homework 9
+- Homework 9: My first hardhat project
+
+DeFi
+- Homework 13: Uniswap V3 token swaps
