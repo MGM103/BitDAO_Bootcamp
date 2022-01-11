@@ -6,6 +6,7 @@ use(solidity);
 
 const DAIAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
 const USDCAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+const uniV3RouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
 
 describe("DeFi", () => {
   let owner;
@@ -32,13 +33,13 @@ describe("DeFi", () => {
       BigInt(INITIAL_AMOUNT)
     );
 
-    tokenSwapInstance = await tokenSwapContract.deploy();
+    tokenSwapInstance = await tokenSwapContract.deploy(uniV3RouterAddress);
+    await tokenSwapInstance.deployed();
   });
 
   it("should check transfer succeeded", async () => {
     let initBal = await DAI_TokenContract.balanceOf(owner.address);
-    console.log(initBal);
-
+    console.log(parseInt(ethers.utils.formatEther(await DAI_TokenContract.balanceOf(owner.address)) ** 18));
     expect(initBal).to.equal(INITIAL_AMOUNT);
   });
 
@@ -48,5 +49,16 @@ describe("DeFi", () => {
     expect(tokenSwapBal).to.equal(INITIAL_AMOUNT);
   });
 
-  it("should make a swap", async () => {});
+  it("should make a swap", async () => {
+    // let UsdcBal = await USDC_TokenContract.balanceOf(owner.address);
+    // UsdcBal = ethers.utils.formatEther(UsdcBal);
+    // expect(UsdcBal).to.equal(0);
+
+    let swapTx = await tokenSwapInstance.swapExactInputSingle(INITIAL_AMOUNT, DAIAddress, USDCAddress)
+    await swapTx.wait();
+
+    UsdcBal = parseInt(ethers.utils.formatEther(await USDC_TokenContract.balanceOf(owner.address)) ** 18);
+    console.log(UsdcBal);
+    expect(UsdcBal).to.be.greaterThan(0);
+  });
 });
